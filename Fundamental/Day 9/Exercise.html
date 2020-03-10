@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <style>
+        table, tr, td {
+            border: 1px solid black;
+            font: 300;
+            border-collapse: collapse;     
+            text-align: center;
+        }
+        
+    
+    </style>
+
+    <p id = "1">
+    </p>
+
+    <table id ='2'>
+        <th>Buah</th>
+        <tr>
+            <td>Nomor</td>
+            <td>Nama</td>
+            <td>harga</td>
+            <td>items</td>
+            <td>expired</td>
+        </tr>
+        <tr> </tr>
+        <tr> 
+            
+        </tr>
+    </table>
+    
+</body>
+<script>
+
+    let menu = ''
+
+   class Produk {
+        constructor(produk, harga, stock) {
+            this.produk = produk
+            this.harga = harga
+            this.stock = stock
+            this.qty = 0
+        }
+    }
+
+    class Buah extends Produk {
+        constructor (produk, harga, stock, expired) {
+            super (produk, harga, stock)
+            this.expired = expired
+        }
+    }
+
+    let arrBuah = [
+        new Buah('Jeruk', 5000, 20, '24-11-2020'),
+        new Buah('Apel', 10000, 20, '25-12-2019'),
+        new Buah('Mangga', 7000, 20, '24-10-2020')
+    ]
+
+
+        menu = ''
+        for (let i = 0; i < arrBuah.length; i++) {
+        document.getElementById('2').innerHTML += `
+            <tr>
+                <td>${i + 1}</td> 
+                <td><strong>${arrBuah[i].produk}</strong></td> 
+                <td>IDR <i>${arrBuah[i].harga}</i>/pcs</td> 
+                <td>${arrBuah[i].stock} items ready</td>  
+                <td> Expire date (${arrBuah[i].expired})</td> 
+            </tr>`
+        }
+
+    
+    
+</script>
+</html>

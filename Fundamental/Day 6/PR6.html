@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+        let menu = ''
+        let cart = ''
+        let totalPrice
+        let inputUserMenu
+        let inputUserMenuIndex
+        let inputUserQuantity
+        let isRepeat
+
+
+        let arrItem = [
+            {Buah: 'Jeruk',Harga: 5000, Stock: 20, Input: 0 },
+            {Buah: 'Apel',Harga: 8000, Stock: 20, Input: 0 },
+            {Buah: 'Mangga',Harga: 7000, Stock: 20, Input: 0}
+        ]
+
+
+        selectUserAdmin()
+
+        function userMenu() {
+
+            do {
+
+                listItemMenu()
+
+                inputUserMenuIndex = inputUserMenu - 1
+
+                if (inputUserMenu == arrItem.length + 2) {
+
+                    showShoppingCart()
+
+                    priceTotal()
+
+                    userInputPrice()
+
+                } else if (inputUserMenu == arrItem.length + 1) {
+
+                    showShoppingCart()
+
+                } else {
+
+                    addCart(inputUserMenuIndex)
+                }
+
+            } while (isRepeat)
+
+        }
+        
+        function selectUserAdmin() {
+            do {
+                adminUser = prompt(`chose betwen admin or user \n\n 1. User \n 2. Admin`)
+    
+                if (adminUser == 1) {
+                    userMenu()
+     
+                } else if (adminUser == 2 ) {
+                    adminMenu()
+                }
+
+            } while (isRepeat)
+
+        }
+
+        function listItemMenu() {
+
+            menu = ''
+            for (i = 0; i < arrItem.length; i++) {
+                menu += (i + 1) + ` ${arrItem[i].Buah} Price ${arrItem[i].Harga} IDR, Stock (${arrItem[i].Stock} Pcs)\n`
+            }
+
+            menu += `${arrItem.length + 1} Cart \n${arrItem.length + 2} Checkout `
+
+            inputUserMenu = prompt(menu)
+        }
+
+        function adminMenu () {
+
+            let inputBuah,inputHargaBuah,inputStockBuah
+
+            
+                inputBuah = prompt(`Masukkan nama buah yang anda ingin jual`)
+                inputHargaBuah = parseInt(prompt(`Masukkan harga buahnya`))
+                inputStockBuah = prompt(`Masukkan Stock dagangan anda`)
+    
+                arrItem.push({Buah: inputBuah, Harga: inputHargaBuah, Stock: inputStockBuah})
+
+            selectUserAdmin ()
+     
+        }
+
+        function priceTotal() {
+
+            totalPrice = 0
+
+            for (i = 0; i < arrItem.length; i++) {
+
+                totalPrice += arrItem[i].Harga * arrItem[i].Input
+            }
+            return totalPrice
+
+        }
+
+        function addCart(inputUserMenuIndex) {
+
+            do {
+
+                inputUserQuantity = parseInt(prompt(`How much  ${arrItem[inputUserMenuIndex].Buah} ?`))
+
+                if (arrItem[inputUserMenuIndex].Stock >= inputUserQuantity + arrItem[inputUserMenuIndex].Input) {
+                    arrItem[inputUserMenuIndex].Input += inputUserQuantity
+                    isRepeat = false
+
+                } else {
+                    alert(`stock ${arrItem[inputUserMenuIndex].Buah} is not enough`)
+                    isRepeat = true
+                }
+
+            } while (isRepeat)
+
+            isRepeat = true
+
+
+        }
+
+        function showShoppingCart() {
+
+            cart = ''
+            for (i = 0; i < arrItem.length; i++) {
+                if (arrItem[i].Input > 0)
+                cart += `${arrItem[i].Buah} (${arrItem[i].Input} Pcs) \n`
+            } if (cart) {
+                alert(cart)
+            } else {
+                alert("Your cart is empty")
+            }
+
+            isRepeat = true
+
+        }
+
+        function userInputPrice() {
+
+            do {
+
+                userPayment = prompt(`Your total purchase are ${totalPrice}`)
+
+                if (userPayment > totalPrice) {
+                    alert(`YOur cahanges are IDR ${userPayment - totalPrice}`)
+                    isRepeat = false
+
+                } else if (userPayment < totalPrice) {
+                    alert(`Your money is not enough  ${totalPrice - userPayment}`)
+                    isRepeat = true
+
+                } else if (userPayment == totalPrice) {
+                    alert('Thank You')
+                    isRepeat = false
+                }
+
+            } while (isRepeat)
+
+            for (let i = 0; i < arrItem.length; i++) {
+                        arrItem[i].Stock -= arrItem[i].Input
+                        arrItem[i].Input = 0
+                    }
+                    
+                    isRepeat = confirm('Do you want to shop again ?')
+
+        }
+
+    </script>
+
+</body>
+
+</html>

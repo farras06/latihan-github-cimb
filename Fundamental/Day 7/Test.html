@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+</head>
+
+<body></body>
+<script>
+
+    class Produk {
+        constructor(produk, harga, stock) {
+            this.produk = produk
+            this.harga = harga
+            this.stock = stock
+            this.qty = 0
+        }
+    }
+
+    class Buah extends Produk {
+        constructor (produk, harga, stock, expired) {
+            super (produk, harga, stock)
+            this.expired = expired
+        }
+    }
+
+    class HandPhone extends Produk {
+        constructor (produk, harga, stock, guarantee) {
+            super (produk, harga, stock)
+            this.guarantee = guarantee
+        }
+    }
+
+    class Clothing extends Produk {
+        constructor(produk, harga, stock, size) {
+            super(produk, harga, stock)
+            this.size = size
+        }
+    }
+
+    let arrBuah = [
+        new Buah('Jeruk', 5000, 20, '24-11-2020'),
+        new Buah('Apel', 10000, 20, '25-12-2019'),
+        new Buah('Mangga', 7000, 20, '24-10-2020')
+    ]
+    let arrHandPhone = [
+        new HandPhone('Xiomay', 3000000, 10, 'NO' ),
+        new HandPhone('OppoIki', 3500000, 10, 'NO')
+    ]
+    let arrClothing = [
+        new Clothing('T-Shirt', 150000, 5, 'S'),
+        new Clothing('Shirt' , 200000, 6, 'S')
+    ]
+
+    let adminPilihJenisBarang
+    let keepBuying
+    let pilihJenisbarang
+    let inputUserMenu;
+    let inputUserMenuIndex;
+    let inputAdminMenu;
+    let inputUserQty;
+    let isRepeat;
+    let totalPrice;
+    let userPayment;
+    let cartCount;
+    let userCart = "";
+
+    let newItem;
+
+    let menu = "";
+
+    function showMenu(isUser) { 
+        menu = "";
+        if (pilihJenisbarang == 1 || adminPilihJenisBarang == 1 || adminPilihHapusBarang == 1 ){ // show menu Buah---------------------------------------------------------------------------
+
+            for (let i = 0; i < arrBuah.length; i++) {
+                menu += `${i + 1}. ${arrBuah[i].produk} IDR ${arrBuah[i].harga}/pcs (${arrBuah[i].stock} items ready)  || Expire date (${arrBuah[i].expired})\n`;
+            }
+    
+            if (isUser) {
+                menu += `${arrBuah.length + 1}. Cart\n`;
+                menu += `${arrBuah.length + 2}. Checkout\n`;
+            }
+    
+            return menu;
+
+        } else if (pilihJenisbarang == 2 || adminPilihJenisBarang == 2 || adminPilihHapusBarang == 2) { // show menu HandPhone---------------------------------------------------------------------------
+
+            for (let i = 0; i < arrHandPhone.length; i++) {
+                menu += `${i + 1}. ${arrHandPhone[i].produk} IDR ${arrHandPhone[i].harga}/pcs (${arrHandPhone[i].stock} items ready) || Guarantee (${arrHandPhone[i].guarantee})\n`;
+            }
+    
+            if (isUser) {
+                menu += `${arrHandPhone.length + 1}. Cart\n`;
+                menu += `${arrHandPhone.length + 2}. Checkout\n`;
+             }
+
+            return menu 
+
+        } else if (pilihJenisbarang == 3 || adminPilihJenisBarang == 3 || adminPilihHapusBarang == 3)  { // show menu Clothing---------------------------------------------------------------------------
+
+            for (let i = 0; i < arrClothing.length; i++) {
+                menu += `${i + 1}. ${arrClothing[i].produk} IDR ${arrClothing[i].harga}/pcs (${arrClothing[i].stock} items ready || Size (${arrClothing[i].size})\n`;
+            }
+
+            if (isUser) {
+                menu += `${arrClothing.length + 1}. Cart\n`;
+                menu += `${arrClothing.length + 2}. Checkout\n`;
+            }
+
+            return menu 
+        }
+    }
+
+    function showCart() {
+        userCart = "";
+        cartCount = 0;
+
+        if (pilihJenisbarang == 1 ) { // Show Cart Buah----------------------------------------------------------------
+            
+            for (let i = 0; i < arrBuah.length; i++) {
+                if (arrBuah[i].qty > 0) {
+                    userCart += `${arrBuah[i].produk} ${arrBuah[i].qty} items in cart\n`;
+                }
+            }
+    
+            if (userCart) {
+                alert(userCart);
+            } else {
+                alert("Cart anda kosong");
+            }
+
+        } else if (pilihJenisbarang == 2 ) { // Show Cart HandPhone----------------------------------------------------------------
+            
+            for (let i = 0; i < arrHandPhone.length; i++) {
+                if (arrHandPhone[i].qty > 0) {
+                    userCart += `${arrHandPhone[i].produk} ${arrHandPhone[i].qty} items in cart || Guarantee (${arrHandPhone[i].guarantee})\n`;
+                }
+            }
+    
+            if (userCart) {
+                alert(userCart);
+            } else {
+                alert("Cart anda kosong");
+            }
+
+        } else if (pilihJenisbarang == 3 ) { // Show Cart Clothing----------------------------------------------------------------
+            
+            for (let i = 0; i < arrClothing.length; i++) {
+                if (arrClothing[i].qty > 0) {
+                    userCart += `${arrClothing[i].produk} ${arrClothing[i].qty} items in cart\n`;
+                }
+            }
+    
+            if (userCart) {
+                alert(userCart);
+            } else {
+                alert("Cart anda kosong");
+            }
+        }
+
+    }
+
+    function calculateTotalPrice() {
+        if (pilihJenisbarang == 1 ) {   // Calculate Price Buah-----------------------------------------------------------------
+            do {
+               totalPrice = 0;
+               for (let i = 0; i < arrBuah.length; i++) {
+                   totalPrice += arrBuah[i].qty * arrBuah[i].harga;
+               }
+   
+               userPayment = prompt(`Total harga = ${totalPrice}`);
+   
+               if (userPayment > totalPrice) {
+                   alert(`Kembalian anda ${userPayment - totalPrice}`);
+                   isRepeat = false;
+               } else if (userPayment < totalPrice) {
+                   alert(`Uang anda kurang ${totalPrice - userPayment}`);
+                   isRepeat = true;
+               } else if (userPayment == totalPrice) {
+                   alert("Terima kasih sudah membayar dengan uang pas");
+                   isRepeat = false;
+               }
+   
+               if (!isRepeat) {
+                   for (let i = 0; i < arrBuah.length; i++) { 
+                       arrBuah[i].stock -= arrBuah[i].qty;
+                   }
+               }
+           } while (isRepeat);
+
+
+        } else if (pilihJenisbarang == 2 ) {  // Calculate Price Handphone-----------------------------------------
+            do {
+                totalPrice = 0;
+                for (let i = 0; i < arrHandPhone.length; i++) {
+                    totalPrice += arrHandPhone[i].qty * arrHandPhone[i].harga;
+                }
+    
+                userPayment = prompt(`Total harga = ${totalPrice}`);
+    
+                if (userPayment > totalPrice) {
+                    alert(`Kembalian anda ${userPayment - totalPrice}`);
+                    isRepeat = false;
+                } else if (userPayment < totalPrice) {
+                    alert(`Uang anda kurang ${totalPrice - userPayment}`);
+                    isRepeat = true;
+                } else if (userPayment == totalPrice) {
+                    alert("Terima kasih sudah membayar dengan uang pas");
+                    isRepeat = false;
+                }
+    
+                if (!isRepeat) {
+                    for (let i = 0; i < arrHandPhone.length; i++) {
+                        arrHandPhone[i].stock -= arrHandPhone[i].qty;
+                    }
+                }
+            } while (isRepeat);
+
+        } else if (pilihJenisbarang == 3 ) {  // Calculate Price Handphone-----------------------------------------
+            do {
+                totalPrice = 0;
+                for (let i = 0; i < arrClothing.length; i++) {
+                    totalPrice += arrClothing[i].qty * arrClothing[i].harga;
+                }
+    
+                userPayment = prompt(`Total harga = ${totalPrice}`);
+    
+                if (userPayment > totalPrice) {
+                    alert(`Kembalian anda ${userPayment - totalPrice}`);
+                    isRepeat = false;
+                } else if (userPayment < totalPrice) {
+                    alert(`Uang anda kurang ${totalPrice - userPayment}`);
+                    isRepeat = true;
+                } else if (userPayment == totalPrice) {
+                    alert("Terima kasih sudah membayar dengan uang pas");
+                    isRepeat = false;
+                }
+    
+                if (!isRepeat) {
+                    for (let i = 0; i < arrClothing.length; i++) {
+                        arrClothing[i].stock -= arrClothing[i].qty;
+                    }
+                }
+            } while (isRepeat);
+        }
+        
+    }
+
+    function addToCart(index) {
+        if (pilihJenisbarang == 1) { // Add to cart Buah----------------------------------------------------------
+
+            inputUserQty = parseInt(prompt(`Mau beli berapa ${arrBuah[index].produk}`))
+    
+            if (arrBuah[index].stock >= inputUserQty + arrBuah[index].qty) {
+                arrBuah[index].qty += inputUserQty;
+            } else {
+                alert(`Stock ${arrBuah[index].produk} tidak mencukupi`);
+            }
+
+        } else if (pilihJenisbarang == 2 ) { // Add to cart HandPhone-----------------------------------------------
+            inputUserQty = parseInt(prompt(`Mau beli berapa ${arrHandPhone[index].produk}`))
+    
+            if (arrHandPhone[index].stock >= inputUserQty + arrHandPhone[index].qty) {
+                if ( arrHandPhone[index].guarantee == 'NO') {
+                    keepBuying = confirm('Do you want to still buy it ?') 
+                }
+                arrHandPhone[index].qty += inputUserQty;
+            } else {
+                alert(`Stock ${arrHandPhone[index].produk} tidak mencukupi`);
+            }
+
+        } else if (pilihJenisbarang == 3 ) { // Add to cart Clothing-----------------------------------------------
+            inputUserQty = parseInt(prompt(`Mau beli berapa ${arrClothing[index].produk}`))
+    
+            if (arrClothing[index].stock >= inputUserQty + arrClothing[index].qty) {
+                arrClothing[index].qty += inputUserQty;
+            } else {
+                alert(`Stock ${arrClothing[index].produk} tidak mencukupi`);
+            }
+        } 
+    }
+
+    function createNewBuah(produk, harga, stock, expired) { //---------------------------------------to add new Buah
+        return {
+            produk,
+            harga,
+            stock,
+            qty: 0,
+            expired
+        };
+    }
+
+    function createNewHandPhone(produk, harga, stock, guarantee) { //--------------------------------------to add new handphone
+        return {
+            produk,
+            harga,
+            stock,
+            qty: 0,
+            guarantee
+        };
+    }
+
+    function createNewClothing(produk, harga, stock, size) { //--------------------------------------to add new Clothing
+        return {
+            produk,
+            harga,
+            stock,
+            qty: 0,
+            size
+        };
+    }
+
+    function deleteBuah(input) { //...............................................................to delete buah
+
+        for ( let i = 0; i < arrBuah.length; i ++ ) {
+            if (arrBuah[i].produk.toLowerCase() == input.toLowerCase()){
+
+                arrBuah.splice(i, 1)
+
+                return 'Berhasil'
+                }
+        
+                }
+            return 'Item tidak ada'
+    }
+
+    function deleteHandPhone(input) {  //-----------------------------------------------------to delete handphone
+
+        for ( let i = 0; i < arrHandPhone.length; i ++ ) {
+            if (arrHandPhone[i].produk.toLowerCase() == input.toLowerCase()){
+
+                arrHandPhone.splice(i, 1)
+
+                return 'Berhasil'
+                }
+        
+                }
+            return 'Item tidak ada'
+    }
+
+    function deleteClothing(input) { //----------------------------------------------------to delete clothing
+
+
+        for ( let i = 0; i < arrClothing.length; i ++ ) {
+            if (arrClothing[i].produk.toLowerCase() == input.toLowerCase()){
+
+                arrClothing.splice(i, 1)
+
+                return 'Berhasil'
+                }
+        
+                }
+            return 'Item tidak ada'
+    }
+
+
+
+//---------------------------------------------------------------------------------------------------------------------------------
+    
+    do {
+
+        let inputMainMenu = prompt(`Login sebagai\n1. User\n2. Admin`);
+
+        if (inputMainMenu == 1) {
+            
+            do {
+                pilihJenisbarang = prompt(`Pilih Jenis barang yang ingin anda beli \n 1. Buah\n 2. HandPhone\n 3. Clothing`)
+    
+                if (pilihJenisbarang == 1 ) { // Beli Buah-------------------------------------------------------------
+                    do {
+                        inputUserMenu = prompt(showMenu(true));
+                        inputUserMenuIndex = inputUserMenu - 1;
+    
+                        if (inputUserMenu == arrBuah.length + 1) {
+                            showCart();
+                        } else if (inputUserMenu == arrBuah.length + 2) {
+                            showCart()
+                            calculateTotalPrice();
+                            isRepeat = confirm("Belanja lagi ga?");
+                        } else if (inputUserMenu < arrBuah.length + 1) {
+                            addToCart(inputUserMenuIndex);
+                            isRepeat = true;
+                        }
+                    } while (isRepeat);
+    
+                } else if (pilihJenisbarang == 2 ) {  // Beli HandPhone---------------------------------------------------
+                    do {
+                        
+                        inputUserMenu = prompt(showMenu(true));
+                        inputUserMenuIndex = inputUserMenu - 1;
+    
+                        if (inputUserMenu == arrHandPhone.length + 1) {
+                            showCart();
+                        } else if (inputUserMenu == arrHandPhone.length + 2) {
+                            showCart()
+                            calculateTotalPrice();
+                            isRepeat = confirm("Belanja lagi ga?");
+                        } else if (inputUserMenu < arrHandPhone.length + 1) {
+                            addToCart(inputUserMenuIndex);
+                            isRepeat = true;
+                        }
+                    } while (isRepeat);
+    
+                } else if (pilihJenisbarang == 3 ) { // Beli Clothing---------------------------------------------------
+                    do {
+                    
+                        inputUserMenu = prompt(showMenu(true));
+                        inputUserMenuIndex = inputUserMenu - 1;
+    
+                        if (inputUserMenu == arrClothing.length + 1) {
+                            showCart();
+                        } else if (inputUserMenu == arrClothing.length + 2) {
+                            showCart()
+                            calculateTotalPrice();
+                            isRepeat = confirm("Belanja lagi ga?");
+                        } else if (inputUserMenu < arrClothing.length + 1) {
+                            addToCart(inputUserMenuIndex);
+                            isRepeat = true;
+                        }
+                    } while (isRepeat);
+                }
+
+            } while (isRepeat)
+
+
+
+        } else if (inputMainMenu == 2) {
+            do {
+                // Admin Menu
+                inputAdminMenu = prompt(`1. Add Item\n2. Delete Item\n3. Show Menu\n4. Logout`);
+
+                if (inputAdminMenu == 1) { 
+                    
+                    adminPilihJenisBarang = prompt(`Choose which kind of Produk want to inputed ?\n1. Buah\n2. HandPhone\n3. Clothing `)
+                        if (adminPilihJenisBarang == 1){
+
+                            let newBuahName = prompt("Masukkan nama Buah");
+                            let newBuahPrice = parseInt(prompt("Masukkan harga Buah"));
+                            let newBuahStock = parseInt(prompt("Masukkan jumlah stock Buah"));
+                            let newBuahExpired = parseInt(prompt("Masukkan expired date Buah"));
+        
+                            arrBuah.push(
+                                createNewBuah(newBuahName, newBuahPrice, newBuahStock, newBuahExpired)
+                            )
+                            alert(showMenu(false))
+                            isRepeat = true
+
+                        } else if (adminPilihJenisBarang == 2){
+
+                            let newHandPhoneName = prompt("Masukkan nama HandPhone");
+                            let newHandPhonePrice = parseInt(prompt("Masukkan harga HandPhone"));
+                            let newHandPhoneStock = parseInt(prompt("Masukkan jumlah stock HandPhone"));
+                            let newHandPhoneExpired = parseInt(prompt("Apakah HandPhone Ini terdapat garansi ?"));
+        
+                            arrHandPhone.push(
+                                createNewHandPhone(newHandPhoneName, newHandPhonePrice, newHandPhoneStock, newHandPhoneGuarantee)
+                            )
+                            alert(showMenu(false))
+                            isRepeat = true
+
+                        }  if (adminPilihJenisBarang == 3){
+
+                            let newClothingName = prompt("Masukkan nama Clothing");
+                            let newClothingPrice = parseInt(prompt("Masukkan harga Clothing"));
+                            let newClothingStock = parseInt(prompt("Masukkan jumlah stock Clothing"));
+                            let newClothingExpired = parseInt(prompt("Masukkan Size"));
+        
+                            arrClothing.push(
+                                createNewClothing(newClothingName, newClothingPrice, newClothingStock, newClothingSize)
+                            )
+                            alert(showMenu(false))
+                            isRepeat = true
+                        }
+
+
+                } else if (inputAdminMenu == 2) {   
+
+                    adminPilihHapusBarang = prompt(`Choose which kind of Produk want to delete \n1. Buah\n2. HandPhone\n3. Clothing `)
+                        
+                    if (adminPilihHapusBarang == 1){
+
+                        let inputDeleteItem = prompt(showMenu(false));
+                        deleteBuah(inputDeleteItem);
+                        isRepeat = true
+
+                    } if (adminPilihHapusBarang == 2){
+
+                        inputDeleteItem = prompt(showMenu(false));
+                        deleteHandPhone(inputDeleteItem);
+                        isRepeat = true
+
+                    } if (adminPilihHapusBarang == 3){
+
+                        inputDeleteItem = prompt(showMenu(false));
+                        deleteClothing(inputDeleteItem);
+                        isRepeat = true
+                    }
+
+
+                } else if (inputAdminMenu == 3) {
+                    alert(showMenu(false));
+                } else if (inputAdminMenu == 4) {
+                    break;
+                }
+                
+            } while (isRepeat);
+
+        }
+
+    } while (isRepeat)
+
+
+</script>
+
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<script>
+    let text1 = "input your height in M"
+    let height = prompt(text1)
+
+    let text2 = "input your Weight in KG"
+    let weight = prompt(text2)
+
+    let IMT = (weight / (height*height))
+    parseFloat(IMT)
+    
+
+    if (IMT >= 40){
+        alert(IMT + " Obesitas")
+    }else if (IMT >= 29){
+        alert(IMT + " Sangat Berlebih")
+    }else if (IMT >= 24){
+        alert(IMT + " Berlebih")
+    }else if (IMT >= 18){
+        alert(IMT + " Ideal")
+    }else if (IMT <= 18){
+        alert(IMT + " Kurang")
+
+    }
+        
+
+
+
+
+    
+</script>
+
+<body>
+    
+</body>
+</html>

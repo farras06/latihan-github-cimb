@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+        let Jeruk = 5000
+        let Apel = 10000
+        let Mangga = 5000
+        let Pir = 10000
+        let JerukJumlah = 10
+        let ApelJumlah = 10
+        let ManggaJumlah = 10
+        let PirJumlah = 10
+        let ApelInput, ManggaInput, PirInput, JerukInput;
+
+
+        let condition = true
+        let ShopAgain = true
+        let MoneyCukup = true
+        let Ulang = true 
+
+        alert(`
+        Jumlah stock Jeruk    ${JerukJumlah}   Harga Jeruk   Rp. ${Jeruk}
+        Jumlah stock Apel     ${ApelJumlah}    Harga Apel    Rp. ${Apel}
+        Jumlah stock Mangga   ${ManggaJumlah}  Harga Mangga  Rp. ${Mangga}
+        Jumlah Stock Pir      ${PirJumlah}     Harga Pir     Rp. ${Pir}`) 
+        
+do {        
+
+    do { 
+            
+
+            do {
+                JerukInput = prompt("Jumlah jeruk yang igin anda beli")
+
+                if (JerukInput > JerukJumlah) {
+                    alert('Jumlah jeruk tidak mencukupi')
+                    condition = true
+                } else {
+                    alert('Jumlah Jeruk yang anda beli ' + JerukInput)
+                    condition = false
+                }
+
+            } while (condition)
+
+
+
+            do {
+                ApelInput = prompt("Jumlah Apel Yang ingin anda beli")
+
+                if (ApelInput > ApelJumlah) {
+                    alert('Jumlah Apel tidak mencukupi')
+                    condition = true
+                } else {
+                    alert('Jumlah Apel Yang Anda Beli ' + ApelInput)
+                    condition = false
+                }
+
+            } while (condition)
+
+
+            do {
+                ManggaInput = prompt("Jumlah Mangga yang ingin anda beli")
+
+                if (ManggaInput > ManggaJumlah) {
+                    alert('jumlah mangga tidak mencukupi')
+                    condition = true
+                } else {
+                    alert('Jumlah Mangga yang anda beli ' + ManggaInput)
+                    condition = false
+                }
+
+            } while (condition)
+
+
+            do {
+                PirInput = prompt("Jumlah Pir yang ingin anda beli")
+
+                if (PirInput > PirJumlah) {
+                    alert('Jumlah pir tidak mencukupi')
+                    condition = true
+                } else {
+                    alert('Jumlah pir yang anda beli ' + PirInput)
+                    condition = false
+                }
+
+            } while (condition)
+
+        
+            
+
+            let TotalHarga = ((Jeruk*JerukInput) + (Apel*ApelInput) + (Pir*PirInput) + (Mangga*ManggaInput))
+            parseInt(TotalHarga)
+
+            alert( "Harga dari belanja anda adalah Rp. " + TotalHarga )
+
+            do {
+
+                let Payment = prompt("Jumlah uang yang ingin anda gunakan untuk membayar")
+
+        
+                    if (Payment == TotalHarga){
+                        
+                        alert("Terima kasih")
+                        ShopAgain = false
+                        MoneyCukup = false
+                    
+                    } else if (Payment < TotalHarga){
+                        alert("Uang anda tidak mencukupi sebanyak " + (TotalHarga - Payment))
+                        MoneyCukup = true
+
+                    } else if (Payment> TotalHarga){
+                        alert ("Kembalian Anda Sebesar " + (Payment - TotalHarga) + " Terima Kasih")
+                        ShopAgain = false
+                        MoneyCukup = false
+
+                    }
+
+                
+                } while(MoneyCukup)
+
+        } while(ShopAgain)
+
+                JerukJumlah  = JerukJumlah  - JerukInput
+                ApelJumlah   = ApelJumlah   - ApelInput
+                ManggaJumlah = ManggaJumlah - ManggaInput
+                PirJumlah    = PirJumlah    - PirInput
+
+                alert(`
+                Jumlah stock Jeruk     ${JerukJumlah}
+                Jumlah stock Apel      ${ApelJumlah}
+                Jumlah stock Mangga    ${ManggaJumlah}
+                Jumlah Stock Pir       ${PirJumlah}`)
+               
+
+                confirm("apakah anda ingin berbelanja lagi ? ")
+
+                ulang = true
+        
+} while(ulang)
+
+    </script>
+</body>
+
+</html>

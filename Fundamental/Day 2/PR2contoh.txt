@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+        <h3>Jeruk harga 5000 stock 10 buah <br> Apel 10000 stock 10 buah <br>
+            Mangga harga 5000 stock 10 buah <br> Pir 10000 Stock 10 Buah
+         </h3>
+
+    <script>
+
+        let Jeruk = 5000
+        let Apel = 10000
+        let Mangga = 5000
+        let Pir = 10000
+        let JerukJ = 100
+        let ApelJ = 100
+        let ManggaJ = 100
+        let PirJ = 100
+
+
+        text1 = "Jumlah Jeruk yang mau di beli"
+        let JerukI = prompt(text1)
+
+        text2 = "Jumlah Apel yang mau di beli"
+        let ApelI = prompt(text2)
+
+        text3 = "Jumlah Mangga yang mau di beli"
+        let ManggaI = prompt(text3)
+
+        text4 = "Jumlah Pir yang mau di beli"
+        let PirI = prompt(text4)
+
+        let Total = ((Jeruk*JerukI) + (Apel*ApelI) + (Pir*PirI) + (Mangga*ManggaI))
+        parseInt(Total)
+
+
+        if ((JerukI > JerukJ ) && (ApelI > ApelJ) && (ManggaI > ManggaJ) && (PirI > PirJ )) {
+
+            alert("Jumlah buah tidak mencukupi") 
+
+        } else {
+            alert( "Harga dari belanja anda adalah " + Total ) 
+            
+            payment.call()
+        } 
+
+    
+
+function payment() {       
+        text5 = "Masukkan Jumalah uang Untuk Membayar Belanjaan Anda"
+        let Uang = prompt(text5)
+        
+        if (Uang == Total){
+            
+            alert("Terima kasih")
+        } else if (Uang < Total){
+            alert("Uang anda tidak mencukupi sebanyak " + (Total - Uang))
+        } else if (Uang > Total){
+            alert ("Kembalian Anda Sebesar " + (Uang - Total) + " Terima Kasih")
+        }
+
+        return
+    }
+        </script>
+</body>
+</html>

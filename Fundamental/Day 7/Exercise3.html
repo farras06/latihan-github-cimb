@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <script>
+
+    let arrKota = ['jakarta', 'bsd', 'bandung']
+        
+    function indexof(sameName) {
+
+    for ( let i = 0; i   < arrKota.length; i ++ ) {
+        if (arrKota[i].toLocaleLowerCase == sameName.toLocaleLowerCase){
+            return i
+             }
+    
+            }
+        return -1
+        }
+    
+
+    let sameName = prompt(arrKota)
+
+    alert(indexof(sameName))
+        
+        </script>
+    
+</body>
+</html>

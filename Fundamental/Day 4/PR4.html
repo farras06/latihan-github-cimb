@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+
+
+        let itemName = ['jeruk', 'apel', 'mannga']
+        let itemPrice = [8000, 10000, 7000]
+        let itemStock = [20, 20, 20]
+        let itemInput = [0, 0, 0]
+
+        let mainMenu
+        let totalHarga
+
+        let item = ''
+
+        let repeat = true
+        let balikMenu = true
+
+
+
+
+        
+
+
+
+        do {
+
+            item = ''
+
+            for (i = 0; i < itemName.length; i++) {
+                item = item + `${itemName[i]} Rp.${itemPrice[i]}/pcs ${itemStock[i]} in Stock \n`
+            }
+
+
+            alert(item)
+            
+            mainMenu = prompt(`1. untuk membeli Jeruk
+          2. untuk membeli apel
+          3. untuk membeli mangga
+          4. untuk check out
+           enter your choises 1/2/3/4 `)
+
+
+
+            if (mainMenu == 1) {
+
+                do {
+                    itemInput[0] = prompt("Jumlah jeruk yang igin anda beli")
+
+                    if (itemInput[0] > itemStock[0]) {
+
+                        alert('Jumlah jeruk tidak mencukupi')
+                        repeat = true
+                    } else {
+                        itemStock[0] = itemStock[0] - itemInput[0]
+                        alert('Jumlah Jeruk yang anda beli ' + itemInput[0])
+                        repeat = false
+                        balikMenu = true
+
+                    }
+
+                } while (repeat)
+
+
+            } else if (mainMenu == 2) {
+
+                do {
+                    itemInput[1] = prompt("Jumlah apel yang igin anda beli")
+
+                    if (itemInput[1] > itemStock[1]) {
+                        alert('Jumlah Apel tidak mencukupi')
+                        repeat = true
+                    } else {
+                        alert('Jumlah Apel yang anda beli ' + itemInput[1])
+                        itemStock[1] = itemStock[1] - itemInput[1]
+                        repeat = false
+                        balikMenu = true
+                    }
+
+                } while (repeat)
+
+
+            } else if (mainMenu == 3) {
+
+                do {
+                    itemInput[2] = prompt("Jumlah mangga yang igin anda beli")
+
+                    if (itemInput[2] > itemStock[2]) {
+                        alert('Jumlah mangga tidak mencukupi')
+                        repeat = true
+                    } else {
+                        alert('Jumlah mangga yang anda beli ' + itemInput[2])
+                        itemStock[2] = itemStock[2] - itemInput[2]
+                        repeat = false
+                        balikMenu = true
+                    }
+
+                } while (repeat)
+
+            } else if (mainMenu == 4) {
+
+                totalHarga = 0
+
+                for (i = 0; i < itemName.length; i++) {
+                    totalHarga = totalHarga + (itemPrice[i] * itemInput[i])
+                }
+
+                alert("Harga dari belanja anda adalah Rp. " + totalHarga)
+
+                do {
+
+                    let Payment = prompt("Jumlah uang yang ingin anda gunakan untuk membayar")
+
+
+                    if (Payment == totalHarga) {
+
+                        alert("Terima kasih")
+                        repeat = false
+                        alert(item)
+                        itemInput.fill(0)
+                        balikMenu = true
+
+                    } else if (Payment < totalHarga) {
+                        alert("Uang anda tidak mencukupi sebanyak " + (totalHarga - Payment))
+                        repeat = true
+
+                    } else if (Payment > totalHarga) {
+                        alert("Kembalian Anda Sebesar " + (Payment - totalHarga) + " Terima Kasih")
+                        repeat = false
+                        alert(item)
+                        itemInput.fill(0)
+                        balikMenu = true
+                    }
+
+                } while (repeat)
+
+            }
+
+        } while (balikMenu)
+
+    </script>
+</body>
+
+</html>

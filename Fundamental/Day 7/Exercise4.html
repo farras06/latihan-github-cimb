@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+
+let Bayar
+let lamaParkir = prompt('parkir berapa jam ?')
+
+if (lamaParkir <= 2  && lamaParkir >= 0 ){
+    Bayar = lamaParkir * 2000
+} else {
+    Bayar = (2 * 2000) + ((lamaParkir - 2)) * 500
+}
+ 
+alert(Bayar)
+
+</script>
+    
+</body>
+</html>

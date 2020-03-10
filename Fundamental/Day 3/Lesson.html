@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        let ask = confirm("Do you want to enter a number ?")
+
+        if (ask = true){
+
+            let condition    
+
+            do {
+            let input = prompt("input angka 1-5")
+
+            if (input < 1 || input > 5 ){
+                alert('Angka tidak di dalam range')
+                condition = true
+            } else{
+                alert('angka anda adalah ' + input)
+                condition = false
+            }
+             
+            } while(condition)  
+
+        }
+
+        
+    </script>
+</body>
+</html>

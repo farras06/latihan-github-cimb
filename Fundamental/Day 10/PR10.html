@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <style>
+        container {
+            align-content: center
+        }
+
+        table,
+        tr,
+        td {
+            border: 1px solid black;
+            font: 300;
+            border-collapse: collapse;
+            text-align: center;
+        }
+    </style>
+    
+    <center>
+
+    <table>
+
+        <thead>
+            <tr>
+                <td onclick = "sortData_name() ">Nama </td>
+                <td onclick="sortData_peekerjaan()">Pekerjaan</td>
+                <td onclick="sortData_umur()">Umur</td>
+                <td>Picture</td>
+            </tr>
+        </thead>
+
+        <tbody id="display">
+
+
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td> <Input id = "inputNama" type = "text" placeholder = "Input Nama " value = ''> </td>
+                <td> <Input id = "inputPerkerjaan" type = "text" placeholder = "Input Pekerjaan "> </td>
+                <td> <Input id = "inputAge" type = "number" placeholder = "Input Umur "> </td>
+                <td> <Input id = "inputPicture" type = "text" placeholder = "Input Picture "> </td>
+                <td> <Input id = "submitBtn" type = "button" value = "Submit" onclick = "addData()" > </td>
+            </tr>
+        </tfoot>
+
+    </table>
+
+    </center>
+
+
+</body>
+
+<script>
+
+    
+    class Employee {
+        constructor(nama, pekerjaan, umur, picture) {
+            this.nama = nama
+            this.pekerjaan = pekerjaan
+            this.umur = umur
+            this.picture = picture
+        }
+    }
+
+    let arrEmployee = [
+        new Employee('Suneo', "bullyer", 12, 'https://cdn1.vectorstock.com/i/1000x1000/71/85/male-avatar-profile-icon-round-man-face-vector-18307185.jpg'),
+        new Employee('Giant' , 'bullyer', 14, 'https://cdn1.vectorstock.com/i/1000x1000/71/85/male-avatar-profile-icon-round-man-face-vector-18307185.jpg'),
+        new Employee('Nobita', "korban bully", 12 ,'https://cdn1.vectorstock.com/i/1000x1000/71/85/male-avatar-profile-icon-round-man-face-vector-18307185.jpg') 
+    ]
+
+
+    const renderData = () => {
+        
+        let hasil = ''
+        arrEmployee.forEach(({ nama, pekerjaan, umur, picture }, index) => {
+
+            hasil += `
+            <tr> 
+                <td> ${nama}</td>
+                <td> ${pekerjaan}</td>
+                <td> ${umur}</td>
+                <td> <img src='${picture}' width='100px' </td>
+                <td> <input id = "deleteBtn" type = "button" value = "Delete" onclick = "deleteData(${index})"
+            </tr>
+            `
+
+        })
+
+        document.getElementById('display').innerHTML = hasil;
+    }
+
+    renderData()
+
+    const addData =  () => {
+        
+
+        let inputNama = document.getElementById('inputNama').value
+        let inputPerkerjaan = document.getElementById('inputPerkerjaan').value
+        let inputAge = document.getElementById('inputAge').value
+        let inputPicture = document.getElementById('inputPicture').value
+
+        let newEmployee = new Employee(inputNama, inputPerkerjaan, inputAge, inputPicture)
+
+        if (inputNama == 0 || inputPerkerjaan == 0 || inputAge == 0 || inputPicture == 0 ) {
+            alert("Field harus Terisi Semua")
+        } else {
+            arrEmployee.push(newEmployee)
+            renderData()
+            alert('berhasil menambahkan data')
+
+            document.getElementById("inputNama").value= ''
+            document.getElementById("inputPerkerjaan").value= ''
+            documenet.getElementById("inputAge").value= ''
+            documenet.getElementById("inputPicture").value= ''
+        }
+
+        }
+
+
+    const deleteData = (deleteIndex) => {
+        arrEmployee.splice(deleteIndex, 1)
+        renderData()
+        if (arrEmployee == 0 ){
+            alert('Data Kosong')
+        }
+    }
+
+    let empty = 0
+
+    const sortData_name = () => {
+        if (empty == 0) {
+            arrEmployee.sort(function sort(a,b) {
+    
+                if ((a.nama.toLowerCase() < b.nama.toLowerCase()) ){  
+                    return -1
+                }
+                    return 1
+                
+            })
+            empty ++
+            
+        } else {
+            arrEmployee.sort(function sort(b,a) {
+
+                if (a.nama.toLowerCase() < b.nama.toLowerCase()) {
+                    return -1
+                } 
+                    return 1
+            })
+
+            empty --
+        }
+        renderData()
+    }
+
+    const sortData_peekerjaan = () => {
+        if (empty == 0) {
+            arrEmployee.sort(function sort(a,b) {
+    
+                if ((a.pekerjaan.toLowerCase() < b.pekerjaan.toLowerCase()) ){  
+                    return -1
+                }
+                    return 1
+                
+            })
+            empty ++
+            
+        } else {
+            arrEmployee.sort(function sort(b,a) {
+
+                if (a.pekerjaan.toLowerCase() < b.pekerjaan.toLowerCase()) {
+                    return -1
+                } 
+                    return 1
+            })
+
+            empty --
+        }
+        renderData()
+    }
+
+    const sortData_umur = () => {
+        if (empty == 0) {
+            arrEmployee.sort(function sort(a,b) {
+    
+                if ((a.umur < b.umur) ){  
+                    return -1
+                }
+                    return 1
+                
+            })
+            empty ++
+            
+        } else {
+            arrEmployee.sort(function sort(b,a) {
+
+                if (a.umur < b.umur) {
+                    return -1
+                } 
+                    return 1
+            })
+
+            empty --
+        }
+        renderData()
+    }
+
+   
+
+</script>
+
+</html>
