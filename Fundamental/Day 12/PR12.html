@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        table,th, tr, td {
+            border: 2px solid black;
+            font: 300;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+
+    <fieldset>
+        <legend> <h3>Filter</h3></legend>
+        <p> Nama :  <input type="text" id="searchNama" placeholder="Search by Name" onkeyup="searchAndFilter()"></p>
+        <p> 
+            Harga :  <input type="number" id="searchMinHarga" placeholder="Input Harga Minimal" onkeyup="searchAndFilter()"> -
+            <input type="number" id="searchMaxHarga" placeholder="Input Harga Maximal" onkeyup="searchAndFilter()"> 
+        </p>
+        <p>
+           Category : <select id="searchCategory" onchange="searchAndFilter()">
+               <option disabled value> Pilih Category </option>
+               <option value="Buah">Buah</option>
+                    <option value="Elektronik">Elektronik</option>
+                    <option value="Pakaian">Pakaian</option>
+           </select>
+        </p>
+        <p> <input type="button" value="Filter" id="filterBtn" onclick="searchAndFilter()"></p>
+    </fieldset>
+
+    <fieldset>
+        <legend><h3>Input Data</h3></legend>
+
+        <tr>
+            <td> <input type="text" id="inputNama" placeholder="Input Nama Barang"></td>
+            <td> <input type="text" id="inputHarga" placeholder="Input Harga Barang"></td>
+            <td> 
+                <select  id="inputCategory">
+                    <option disabled value>Pilih Kategori Barang</option>
+                    <option value="Buah">Buah</option>
+                    <option value="Elektronik">Elektronik</option>
+                    <option value="Pakaian">Pakaian</option>
+                </select>
+            </td>
+            <td> <input type="number" id="inputStock" placeholder="Input Stock Barang"></td>
+            <td> <input type="button" id="addItemBtn" value="Add Item" onclick="addItem()"></td>
+        </tr>
+    </fieldset>
+
+    <fieldset>
+        <legend><h3>Tabel Data</h3></legend>
+
+        <table>
+            <thead>
+                <tr>
+                <td>ID</td>
+                <td>Category</td>
+                <td>Nama</td>
+                <td>Harga</td>
+                <td>Stock</td>
+                <td>Buy</td>
+                <td colspan="2">Action</td>
+                </tr>
+            </thead>
+
+            <tbody id="displayData">
+
+            </tbody>
+
+            <p id="dataKosong"></p>
+
+        </table>
+    </fieldset>
+
+    <fieldset>
+        <legend><h3>Cart</h3></legend>
+
+        <table>
+
+            <thead>
+                <tr>
+                    <td>Category</td>
+                        <td>ID</td>
+                        <td>Nama</td>
+                        <td>Harga</td>
+                        <td>Quantity</td>
+                        <td>Action</td>
+                </tr>
+            </thead>
+
+            <tbody id="displayCart">
+
+
+            </tbody>
+
+        </table> <br> <br>
+
+        <input type="button" id="payment" value="Payment">
+
+    </fieldset>
+
+    <fieldset>
+        <legend> <h3>Payment</h3></legend> <br><br>
+
+        <P id="transactionDetail"> <h2> Transaction Detail</h2></P>
+    </fieldset>
+
+
+</body>
+
+<script>
+
+class Item {
+        constructor(id, category,nama, harga, stock, qty) {
+            this.id = id
+            this.category = category
+            this.nama = nama
+            this.harga = harga
+            this.stock = stock
+            this.qty = 0
+            
+        }
+    }
+
+let arrItem = [
+    new Item ('E12', "Elektronik", 'Samsung plip', '10000', 3 ),
+    new Item ('P11', "Pakaian", 'Kaos Oblong', 1000, 15)
+]
+
+let arrCart = []
+
+    
+
+   
+    const renderData = (arr = arrItem) => {
+        
+        let item = ''
+        arr.forEach(({ id,category, nama, harga, stock}, index) => {
+            
+            item += `
+            <tr> 
+                <td> ${id}</td>
+                <td> ${category}</td>
+                <td> ${nama}</td>
+                <td> ${harga}</td>
+                <td> ${stock} </td>
+                <td> <input id = "buyBtn" type= 'button' value='Buy' onclick='addToCart("${id}")' </td>
+                <td> <input id = "deleteBtn" type = "button" value = "Delete" onclick = "deleteData(${index})"
+                <td> <input id = 'editItemBtn' type='button' value = 'Edit' onclick='editItem(${index})' </td>
+            </tr>
+            `
+
+        })
+
+        document.getElementById('displayData').innerHTML = item;
+    }
+
+    renderData(arrItem)
+
+    //======================================================================================================================
+
+    const deleteData = (deleteIndex) => {
+        arrItem.splice(deleteIndex, 1)
+        renderData()
+        if (arrItem == 0) {
+            document.getElementById("dataKosong").innerHTML = "Kosong"
+        }
+        
+        
+    }
+
+
+    const addItem = () => {
+        let inputNama = document.getElementById('inputNama').value
+        let inputharga = document.getElementById('inputHarga').value
+        let inputCategory = document.getElementById('inputCategory').value
+        let inputStock = document.getElementById('inputStock').value
+        let inputId
+
+        if (inputCategory == "Elektronik" ) {
+            inputId = 'E' + Math.floor((Math.random() * 100) + 1)
+        } else if (inputCategory == 'Pakaian') {
+            inputId = 'P' + Math.floor((Math.random() * 100) + 1)
+        } else if (inputCategory == 'Buah') {
+            inputId = 'B' + Math.floor((Math.random() * 100 ) + 1)
+        }
+
+        let newItem = new Item (inputId, inputCategory, inputNama, inputharga, inputStock)
+
+        arrItem.push(newItem)
+        renderData(arrItem)
+    }
+
+    const searchAndFilter = () => {
+
+        let hasil = []
+        let searchNama = document.getElementById("searchNama").value
+        let searchMinHarga = document.getElementById('searchMinHarga').value
+        let searchMaxHarga  = document.getElementById('searchMaxHarga').value
+        let searchCategory = document.getElementById('searchCategory').value
+
+
+        if (!searchMaxHarga) {
+            searchMaxHarga = 99999999999999999999999999
+        }
+
+        arrItem.forEach((val) => {
+            let {nama, category, harga} = val
+                if ((nama.toLowerCase().startsWith(searchNama.toLowerCase())) &&
+                (category.toLowerCase().startsWith(searchCategory.toLowerCase()))
+                && harga >= searchMinHarga  && harga <= searchMaxHarga
+                )
+                {
+                    hasil.push(val)
+                }               
+        })
+
+        renderData(hasil)
+    }
+
+    
+    const addToCart = (id) => {
+
+        let item = arrItem.find((val) => val.id == id)
+
+        let isInCart  = arrCart.find((val) => val.id == item.id)
+
+        if (isInCart){
+            let idx = arrCart.findIndex((val) => val.id == isInCart.id)
+
+            if(arrCart[idx].qty + 1 <= arrItem[idx].stock){
+                arrCart[idx].qty ++
+            } else {
+                alert('habis om')
+            }
+
+        } else {
+            let newCartItem = {
+                ...item , qty: 1 
+            }
+
+        arrCart.push(newCartItem)
+        }
+
+        renderCart()
+    }
+
+    const renderCart = () => {
+        let cart = ''
+        arrCart.forEach((val) => {
+            let {id , category, nama, harga, qty} = val
+            cart += `
+                <tr> 
+                    <td> ${id} </td>
+                    <td> ${category} </td>
+                    <td> ${nama} </td>
+                    <td> ${harga} </td>
+                    <td> ${qty} </td>
+                    <td> <input type='button' value = 'Delete' onclick='deleteCart("(${id})")' </td>
+                </tr>
+            `
+            document.getElementById('displayCart').innerHTML = cart
+
+        })
+    }
+
+    const deleteCart = (id) => {
+        let idx = arrItem.findIndex((val) => val.id == id)
+            arrCart.splice(id , 1)
+            renderCart()
+        
+    }
+
+</script>
+</html>

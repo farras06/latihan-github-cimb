@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Drawing Tool</h1> <br>
+    <h3>1. persegi</h3> 
+    <h3>2. segitiga siku2 rata kiri</h3> 
+    <h3>3. segitiga siku2 rata kanan</h3> 
+
+    <h3>Jenis Banugunan :</h3> <br>
+    <input type="number" id="inputJenis"> <br>
+
+    <h3>Ukuran :</h3> <br>
+    <input type="number" id="inputUkuran">
+
+    <input type="button" value="Lihat" onclick="mainFunction()">
+
+    <p id="gambar"></p>
+
+    <script>
+
+        
+        const mainFunction = () =>{
+            
+        let inputUkuran = document.getElementById("inputUkuran").value
+        let inputJenis = document.getElementById("inputJenis").value
+
+        if (inputJenis == 1) {
+            alert("persegi")
+            persegi(inputUkuran) 
+        } else if (inputJenis == 2){
+            alert ("segitiga siku rata kiri")
+            segitigaRataKiri(inputUkuran)
+        } else if (inputJenis == 3) {
+            alert ("segita siku rata kanan")
+            segitigaRataKanan(inputUkuran)
+        }
+    
+        }
+
+        const persegi = (inputUkuran) => {
+
+            let stars = ''
+            for (let i = 0 ;i < inputUkuran; i ++) {
+                for (let j = 0 ;j < inputUkuran; j ++){
+
+                stars += `*`
+                }
+                
+                stars += "\n"
+            }
+            document.getElementById("inputJenis").value = ''
+            document.getElementById("inputUkuran").value = ''
+            // document.getElementById("gambar").innerHTML = stars
+            console.log(stars + '\n')
+        }
+
+
+        const segitigaRataKiri = (inputUkuran) => {
+
+            let stars = ''
+            for (let i = 0 ;i < inputUkuran ;i ++){
+                stars += `*`
+                for (let j = 0 ;j < i; j ++){
+                stars += `*`
+                }             
+                stars += "\n"
+            }
+            document.getElementById("inputJenis").value = ''
+            document.getElementById("inputUkuran").value = ''
+            // document.getElementById("gambar").innerHTML = stars
+            console.log(stars + '\n')
+        }
+
+
+        const segitigaRataKanan = (inputUkuran) => {
+
+            let stars = ''
+            for (let i = 1; i <= inputUkuran; i++) {
+                for (let j = 0; j < inputUkuran - i; j++) {
+                    stars += ' '
+                }
+                for (let k = 0; k < i; k++) {
+                    stars += `*`
+                }
+                stars += "\n"
+            }
+            document.getElementById("inputJenis").value = ''
+            document.getElementById("inputUkuran").value = ''
+            // document.getElementById("gambar").innerHTML = stars
+            console.log(stars + '\n')
+        }
+
+        
+        
+
+    </script>
+
+    
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .container-height {
+        display: flex;
+        justify-content: center; /* Along The X(main axis) axis on the scrren */
+        align-items: center;    /* Along The Y(cross axis) axis on the scrren */
+        height: 500px
+    }
+
+    .searchBar {
+        color: black;
+        border-radius: 18px;
+        padding: 10px
+
+    }
+
+    .button {
+        color: black;
+        border-radius: 8px;
+        background-color:white;
+        padding: 10px 8px;
+        font-size: 16px;
+        transition-duration: 0.4s;
+        
+    }
+    .button:hover {
+        cursor: pointer;
+
+    }
+    
+</style>
+<body>
+    <div class="container-height">
+
+        <input type="text" id="searchBar" class="searchBar"> <br> <br>
+        <input type="button" value="Google Search" class="button"> 
+        <input type="button" value="I'm Feeling Lucky" class="button">
+        
+    </div>
+
+</body>
+</html>

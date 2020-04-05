@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+
+    let val1
+    let val2
+    let val3
+
+
+    val1 = prompt('enter first number')
+    val2 = prompt('enter second number')
+    val3 = prompt('enter third number')
+
+    
+    let arr = [val1, val2 , val3]
+
+
+    for (i = 0 ; i <arr.length ; i ++ ) {
+
+        if (val1 > val2 ) {
+           if (val1 > val3) {
+                alert(val1)
+            } else if (val3 > val1) {
+                alert(val3)
+            }
+
+        } else if (val1 > val3 ) {
+            if (val1 > val3) {
+                if(val1 > val2 ) {
+                    alert(val1)
+                } else if (val2 > val1) {
+                    alert(val2)
+                }
+            }
+
+        } else if (val2 > val3 ) {
+            if (val2 > val1) {
+                alert(val2)
+            } else if (val2 < val1 ){
+                alert (val1)
+            }
+
+        } else if (val1 < val2) {
+            if (val1 < val3) {
+                alert(val3) 
+            } else if (val3 < val1 ) {
+                alert(val1)
+            }
+            
+        } else if (val1 < val3) {
+            if (val1 < val2){
+                alert(val2)
+            } else if (val2 < val1){
+                alert(val1)
+            }
+
+        } else if (val2 < val3) {
+            if (val2 < val1) {
+                alert(val1)
+            } else if (val1 < val2){
+                alert(val2)
+            }
+        }
+    }
+
+    console.log(arr)
+
+</script>
+</html>

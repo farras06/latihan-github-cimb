@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+
+<script>
+    
+    let arr = []
+    let isRepeat = true
+    let alphabet ='abcdefghijklmnopqrstuvwxyz'
+    let arrInput = []
+    arrInput = prompt('Enter the Number')
+    
+    let compare, string, newInt
+    
+    
+    while(isRepeat){
+
+        compare = arrInput.split('')
+
+        for (let i = 0 ; i < arrInput.length; i++ ) {
+            for (let j = 0 ; j < alphabet.length ; j++) {
+                if (compare[i].toLowerCase() == alphabet[j]) {
+                    string = true
+
+                }
+            }
+        }
+        if (string ==  true) {
+            console.log(arr)
+            isRepeat = false
+
+        } else {
+            newInt = parseInt(arrInput)
+            arr.push(newInt)
+            arrInput = prompt('Enter the Number')
+            isRepeat = true
+        }
+    }
+
+    let max = 1
+    let min = 999999
+    let temp
+
+    for (let i = 0 ; i < arr.length; i++ ) {
+        for (let j = 0 ; j < arr.length; j++ ) {
+            if (arr[i] < arr[j]) {
+                temp = arr[i]
+                arr[i] = arr[j]
+                arr[j] = temp
+            }
+        }
+    } 
+
+    console.log (`Number after sorted ${arr}`)
+
+    for (let i = 0 ; i < arr.length; i++ ) {
+
+        if (max < arr[i]){
+            max = arr[i]
+        } else {
+            max = max
+        }
+
+        if (min > arr[i]) {
+            min = arr[i]
+        } else {
+            min = min
+        }
+    }
+
+    console.log(`The Highest Number is ${max}`)
+    console.log(`The Lowest Number is ${min}`)
+    
+</script>
+
+</html>

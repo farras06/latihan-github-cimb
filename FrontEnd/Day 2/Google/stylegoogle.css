@@ -1,0 +1,91 @@
+.navbar{
+    display: flex;
+    justify-content: flex-end;
+    padding-left:20px;
+    padding-right:20px;
+}
+.navbar-item{
+    color: black;
+    padding: 10px;
+    text-decoration: none; 
+    margin-left: 5px;
+}
+.navbar-item:hover{
+    text-decoration-line: underline;
+    cursor: pointer;
+    
+    
+}
+.divGambarGoogle{
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.GambarGoogle{
+    height: 90px;
+    width: 270px;
+}
+.google{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height : 50px;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+.google2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+   
+    height: 50px;
+}
+.google3{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    height: 50px;
+    font-size: 14px;
+}
+.inputText:hover{
+    -webkit-box-shadow: 0px 0px 11px 2px rgba(207,207,207,1);
+    -moz-box-shadow: 0px 0px 11px 2px rgba(207,207,207,1);
+    box-shadow: 0px 0px 11px 2px rgba(207,207,207,1);
+    border: 0px;
+}
+.inputText{
+    font-size: 16px;
+    border-radius: 32px;
+    padding: 12px;
+    border: 1px solid lightgrey;
+    width: 500px;
+}
+.Tombol{
+    color: grey;
+    font-size: 14px;
+    padding: 8px 16px;
+    border:0px;
+    border-radius: 4px;
+    margin-left: 15px;
+}
+
+.Tombol:hover{
+    color: black;
+    border: 1px rgba(0, 0, 0, 0.219) solid;
+    -webkit-box-shadow: 0px 0px 11px -4px rgba(163,163,163,1);
+    -moz-box-shadow: 60px 0px 11px -4px rgba(163,163,163,1);
+    box-shadow: 0px 0px 11px -4px rgba(163,163,163,1);
+}
+.tulisan1{
+    text-decoration-line: none;
+    margin: 10px;
+    color: rgb(0, 12, 180);
+}
+.tulisan1:hover{
+    text-decoration-line: underline
+}

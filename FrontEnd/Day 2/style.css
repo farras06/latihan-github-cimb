@@ -1,0 +1,38 @@
+.box {
+    height: 50px;
+    width: 50px;
+    background-color: grey;
+    border: 1px solid black;
+    display: inline-block;
+}
+
+.text {
+    padding-left: 10px;
+    padding-right: 10px
+
+}
+.container {
+    display: flex;
+    justify-content: space-between 10px;
+    margin: 5px;
+}
+.container1 {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+}
+
+.container-start{
+    display: flex;
+    justify-content: flex-start;
+}
+
+
+.container-height{
+    display: flex;
+    height: 300px;
+    border: 1px solid red;
+    justify-content: center; /* Along The X(main axis) axis on the scrren */
+    align-items: center;    /* Along The Y(cross axis) axis on the scrren */
+    flex-direction: column;
+}

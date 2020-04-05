@@ -1,0 +1,10 @@
+
+
+const mumble = (word) => {
+    var arr = word.split('')
+    var newArr  = []
+
+    for (var i = 0)
+    
+    
+}

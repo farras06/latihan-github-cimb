@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <style>
+
+       
+        table, tr, td {
+            border: 1px solid black;
+            font: 300;
+            border-collapse: collapse;
+            text-align: center;
+        }
+
+    </style>
+    
+    <center>
+
+    <table>
+
+        <thead>
+            <tr>
+                <td onclick = "sortData_name() ">Nama </td>
+                <td onclick="sortData_peekerjaan()">Pekerjaan</td>
+                <td> Gender</td>
+                <td onclick="sortData_umur()">Umur</td>
+                <td>Biodata</td>
+                <td>Picture</td>
+            </tr>
+        </thead>
+
+        <tbody id="display">
+
+
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td> <Input id = "inputNama" type = "text" placeholder = "Input Nama " value = ''> </td>
+                <td> <Input id = "inputPerkerjaan" type = "text" placeholder = "Input Pekerjaan "> </td>
+                <td> 
+                    <Input id = "inputGenderMale" type ="radio" value="Male" name="gender">M
+                    <Input id = "inputGenderFemale" type ="radio" value="Female" name="gender">F
+                </td>    
+                <td> <Input id = "inputAge" type = "number" placeholder = "Input Umur "> </td>
+                <td> 
+                    <textarea id ="inputBiodata" rows="2"cols="30" placeholder="Input Biodata"></textarea> <br>
+                    <span id ="wordCount">0/30</span>
+                </td>
+                <td> <Input id = "inputPicture" type = "text" placeholder = "Input Picture "> </td>
+
+                <td> <Input id = "submitBtn" type = "button" value = "Submit" onclick = "addData()" > </td>
+            </tr>
+        </tfoot>
+
+    </table> <br> <br> <br> <br> <br>
+
+    <table>
+        <td> <input type="text" id="searchNama" placeholder="Search by name"></td>
+        <td> <input type="text" id="searchPerkerjaan" placeholder="Search by job"></td>
+        <td> 
+            <select id="searchGender">
+                <option disabled value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+        </td>
+        <td> 
+            <input id="searchMinAge" type="number" placeholder="Input Min Age">
+            <input id="searchMaxAge" type="number" placeholder="Input Max Age">
+        </td>
+        <td><input id="searchButton" type="Button" value="search" onclick="searchAndFilter()"></td>
+    </table>
+
+    </center>
+
+
+</body>
+
+<script>
+
+    
+    class Employee {
+        constructor(nama, pekerjaan,gender, umur,biodata, picture) {
+            this.nama = nama
+            this.pekerjaan = pekerjaan
+            this.gender = gender
+            this.umur = umur
+            this.biodata = biodata
+            this.picture = picture
+        }
+    }
+
+    let arrEmployee = [
+        new Employee('Suneo', "bullyer","Male" , 12, "Hobby Ngibul", 'https://cdn1.vectorstock.com/i/1000x1000/71/85/male-avatar-profile-icon-round-man-face-vector-18307185.jpg'),
+        new Employee('Giant' , 'bullyer',"Male", 14,"Hobby Mukul", 'https://cdn1.vectorstock.com/i/1000x1000/71/85/male-avatar-profile-icon-round-man-face-vector-18307185.jpg'),
+        new Employee('Nobita', "korban bully","Male", 12 ,"hobby Nangis", 'https://cdn1.vectorstock.com/i/1000x1000/71/85/male-avatar-profile-icon-round-man-face-vector-18307185.jpg'),
+        new Employee('Budi', "Pelajar", "Male", 23, "Budi seorang Pelajar tekun", "https://cdn1.vectorstock.com/i/1000x1000/71/85/male-avatar-profile-icon-round-man-face-vector-18307185.jpg")
+    ]
+    
+    
+    document.getElementById("inputBiodata").onkeyup = function () {
+        document.getElementById("wordCount").innerHTML = (this.value.length) + "/30"
+    }
+
+    const renderData = (arr = arrEmployee) => {
+        
+        let hasil = ''
+        arr.forEach(({ nama, pekerjaan,gender, umur,biodata, picture }, index) => {
+            
+            if (biodata.length > 30){
+                biodata = biodata.slice(0,30) 
+                biodata = biodata + "...."
+            }
+            hasil += `
+            <tr> 
+                <td> ${nama}</td>
+                <td> ${pekerjaan}</td>
+                <td> ${gender}</td>
+                <td> ${umur}</td>
+                <td> ${biodata} </td>
+                <td> <img src='${picture}' width='100px' </td>
+                <td> <input id = "deleteBtn" type = "button" value = "Delete" onclick = "deleteData(${index})"
+            </tr>
+            `
+
+        })
+
+        document.getElementById('display').innerHTML = hasil;
+    }
+
+    renderData(arrEmployee)
+
+    const addData =  () => {
+        
+
+        let inputNama = document.getElementById('inputNama').value
+        let inputPerkerjaan = document.getElementById('inputPerkerjaan').value
+        let inputAge = document.getElementById('inputAge').value
+        let inputPicture = document.getElementById('inputPicture').value
+        let inputBiodata = document.getElementById("inputBiodata").value
+        let inputGender
+        if (document.getElementById("inputGenderFemale").checked) {
+            inputGender = document.getElementById("inputGenderFemale").value
+        } else {
+            inputGender = document.getElementById("inputGenderMale").value
+        }
+
+        let newEmployee = new Employee(inputNama, inputPerkerjaan,inputGender, inputAge,inputBiodata, inputPicture)
+
+        console.log(newEmployee)
+
+        if (inputNama == 0 || inputPerkerjaan == 0 || inputAge == 0 || inputPicture == 0) {
+            alert("Field harus Terisi Semua")
+        } else {
+            arrEmployee.push(newEmployee)
+            renderData()
+            alert('berhasil menambahkan data')
+
+            document.getElementById("inputNama").value= ''
+            document.getElementById("inputPerkerjaan").value= ''
+            document.getElementById("inputAge").value = ''
+            document.getElementById("inputPicture").value = ''
+            document.getElementById("inputBiodata").value = ''
+            
+        }
+
+        }
+
+
+    const deleteData = (deleteIndex) => {
+        arrEmployee.splice(deleteIndex, 1)
+        renderData()
+        if (arrEmployee == 0 ){
+            alert('Data Kosong')
+        }
+    }
+
+    let empty = 0
+
+    const sortData_name = () => {
+        if (empty == 0) {
+            arrEmployee.sort(function sort(a,b) {
+    
+                if ((a.nama.toLowerCase() < b.nama.toLowerCase()) ){  
+                    return -1
+                }
+                    return 1
+                
+            })
+            empty ++
+            
+        } else {
+            arrEmployee.sort(function sort(b,a) {
+
+                if (a.nama.toLowerCase() < b.nama.toLowerCase()) {
+                    return -1
+                } 
+                    return 1
+            })
+
+            empty --
+        }
+        renderData()
+    }
+
+    const sortData_peekerjaan = () => {
+        if (empty == 0) {
+            arrEmployee.sort(function sort(a,b) {
+    
+                if ((a.pekerjaan.toLowerCase() < b.pekerjaan.toLowerCase()) ){  
+                    return -1
+                }
+                    return 1
+                
+            })
+            empty ++
+            
+        } else {
+            arrEmployee.sort(function sort(b,a) {
+
+                if (a.pekerjaan.toLowerCase() < b.pekerjaan.toLowerCase()) {
+                    return -1
+                } 
+                    return 1
+            })
+
+            empty --
+        }
+        renderData()
+    }
+
+    const sortData_umur = () => {
+        if (empty == 0) {
+            arrEmployee.sort(function sort(a,b) {
+    
+                if ((a.umur < b.umur) ){  
+                    return -1
+                }
+                    return 1
+                
+            })
+            empty ++
+            
+        } else {
+            arrEmployee.sort(function sort(b,a) {
+
+                if (a.umur < b.umur) {
+                    return -1
+                } 
+                    return 1
+            })
+
+            empty --
+        }
+        renderData()
+    }
+
+
+        const searchAndFilter = () => {
+            let hasil = []
+            let searchNama = document.getElementById("searchNama").value
+            let searchPerkerjaan = document.getElementById("searchPerkerjaan").value
+            let searchGender = document.getElementById("searchGender").value
+            let searchMinAge = document.getElementById("searchMinAge").value
+            let searchMaxAge = document.getElementById("searchMaxAge").value
+
+
+            if (!searchMaxAge) {
+                searchMaxAge = 999
+            }
+
+            arrEmployee.forEach((val) => {
+                let {nama, pekerjaan, gender, umur} = val
+                if (nama.toLowerCase().startsWith(searchNama.toLowerCase()) &&
+                pekerjaan.toLowerCase().startsWith(searchPerkerjaan.toLowerCase()) &&
+                gender.toLowerCase().startsWith(searchGender.toLowerCase()) 
+                && umur >= searchMinAge  && umur <= searchMaxAge
+                )
+                {
+                    hasil.push(val)
+                }
+                
+            })
+            renderData(hasil)
+
+            console.log(hasil)
+        }
+
+   
+
+</script>
+
+</html>

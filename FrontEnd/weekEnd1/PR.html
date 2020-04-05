@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap.css">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    
+    * {
+        box-sizing: border-box;
+    }
+    
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+        background-image: url(back.jpeg)
+    }
+    
+/* Style the side navigation */
+.sidenav {
+    height: 100%;
+    width: 200px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+}
+
+
+/* Side navigation links */
+.sidenav a {
+    color: white;
+    padding: 16px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Change color on hover */
+.sidenav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Style the content */
+.content {
+    margin-left: 200px;
+    padding-left: 20px;
+}
+
+.image {
+    height: 200px;
+    width: 200px
+}
+
+.imagetext {
+    font-size: 20px;
+}
+
+.subsectiontext {
+    font-size: 30px;
+}
+
+.header {
+    font-size: 40px;
+}
+</style>
+    
+<body>
+    <div class="sidenav">
+  <a href="#" onmouseover="introHover()" onclick="introClick()">INTRODUCTION</a>
+  <a href="#"onmouseover="biodataHover()" onclick="biodataClick()">BIODATA</a>
+  <a href="#"onmouseover="showAllHover()" onclick="allClick()">Show All my Information</a>
+</div>
+
+<div class="content">
+    <div id="home">
+        <h2 class="header">Farras Ammar</h2>
+        <p>if you want to know more about me, feel free to tweak this website :)</p>
+    </div>
+</div> <br> <br>
+
+<div id="openingText"></div>
+<br> <br>
+<div id="content"></div>
+
+<!-- <div class="row content mb-4"> 
+    <div class="col-3">
+        <p class="subsectiontext">Some of my Story</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit fugiat enim soluta voluptatibus. Enim sed cum amet temporibus aperiam. Eaque minima amet animi consequatur quaerat asperiores consectetur maiores dolore unde.</p>
+    </div>
+
+    <div class="col-9">
+        <p class="subsectiontext">People aroud me</p>
+        <div class="row">
+            <div class="col-3">
+                <p class="imagetext">Homer</p>
+                <img class="image" src="homer.png">
+            </div>
+
+            <div class="col-3">
+                <p class="imagetext">Nelson</p>                
+                <img class="image" src="nelson.png" alt="">
+            </div>
+
+            <div class="col-3">
+                <p class="imagetext">krusty</p>
+                <img class="image" src="krusty.png" alt="">
+            </div>
+
+            <div class="col-3">
+                <p class="imagetext">Bart</p>
+                <img class="image" src="bart.png" alt="">
+            </div>
+        </div>
+        
+    </div>
+</div> -->
+
+<!-- <div class="row content mb-4">
+    <div class="col-4">
+        <p class="subsectiontext text-center">Basic Information</p>
+
+    </div>
+    <div class="col-4">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt id, numquam necessitatibus a ex debitis eum autem facere harum aliquid vero quis nulla iste saepe error consequuntur odio, beatae iusto!</p>
+    </div>
+
+</div>
+
+<div class="row content mb-4">
+    <div class="col-4">
+        <p class="subsectiontext text-center">Basic Information</p>
+
+    </div>
+    <div class="col-4">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt id, numquam necessitatibus a ex debitis eum autem facere harum aliquid vero quis nulla iste saepe error consequuntur odio, beatae iusto!</p>
+    </div>
+
+</div> -->
+
+</body>
+
+<script>
+
+    const introHover = () => {
+        document.getElementById('openingText').innerHTML = 
+    `<div class="content">
+        <p class= "subsectiontext">Little bit of me </p>
+    </div>
+    `
+    }
+
+    const biodataHover = () => {
+        document.getElementById('openingText').innerHTML =
+    `<div class="content">
+        <p class="subsectiontext">Little information about me</p>
+    </div>
+    `
+    }
+
+    const showAllHover = () => {
+        document.getElementById('openingText').innerHTML =
+    `<div class="content">
+        <p class="subsectiontext">Show all information in this website</p>
+    </div>
+    `
+    }
+
+    const introClick = () => {
+        document.getElementById('content').innerHTML = 
+        `<div class="row content mb-4"> 
+            <div class="col-3">
+                <p class="subsectiontext">Some of my Story</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit fugiat enim soluta voluptatibus. Enim sed cum amet temporibus aperiam. Eaque minima amet animi consequatur quaerat asperiores consectetur maiores dolore unde.</p>
+            </div>
+
+            <div class="col-9">
+                <p class="subsectiontext">People aroud me</p>
+                <div class="row">
+                    <div class="col-3">
+                        <p class="imagetext">Homer</p>
+                        <img class="image" src="homer.png">
+                    </div>
+
+                    <div class="col-3">
+                        <p class="imagetext">Nelson</p>                
+                        <img class="image" src="nelson.png" alt="">
+                    </div>
+
+                    <div class="col-3">
+                        <p class="imagetext">krusty</p>
+                        <img class="image" src="krusty.png" alt="">
+                    </div>
+
+                    <div class="col-3">
+                        <p class="imagetext">Bart</p>
+                        <img class="image" src="bart.png" alt="">
+                    </div>
+                </div>
+                
+            </div>
+        </div> `
+
+    }
+
+    const biodataClick = () => {
+        document.getElementById('content').innerHTML = 
+        `<div class="row content mb-4">
+            <div class="col-4">
+                <p class="subsectiontext text-center">Basic Information</p>
+
+            </div>
+            <div class="col-4">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt id, numquam necessitatibus a ex debitis eum autem facere harum aliquid vero quis nulla iste saepe error consequuntur odio, beatae iusto!</p>
+            </div>
+
+        </div>
+
+        <div class="row content mb-4">
+            <div class="col-4">
+                <p class="subsectiontext text-center">My Experience</p>
+
+            </div>
+            <div class="col-4">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt id, numquam necessitatibus a ex debitis eum autem facere harum aliquid vero quis nulla iste saepe error consequuntur odio, beatae iusto!</p>
+            </div>
+
+        </div>
+        `
+    }
+
+    const allClick = () => {
+        document.getElementById('content').innerHTML =
+
+        `<div class="row content mb-4"> 
+            <div class="col-3">
+                <p class="subsectiontext">Some of my Story</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit fugiat enim soluta voluptatibus. Enim sed cum amet temporibus aperiam. Eaque minima amet animi consequatur quaerat asperiores consectetur maiores dolore unde.</p>
+            </div>
+
+            <div class="col-9">
+                <p class="subsectiontext">People aroud me</p>
+                <div class="row">
+                    <div class="col-3">
+                        <p class="imagetext">Homer</p>
+                        <img class="image" src="homer.png">
+                    </div>
+
+                    <div class="col-3">
+                        <p class="imagetext">Nelson</p>                
+                        <img class="image" src="nelson.png" alt="">
+                    </div>
+
+                    <div class="col-3">
+                        <p class="imagetext">krusty</p>
+                        <img class="image" src="krusty.png" alt="">
+                    </div>
+
+                    <div class="col-3">
+                        <p class="imagetext">Bart</p>
+                        <img class="image" src="bart.png" alt="">
+                    </div>
+                </div>
+                
+            </div>
+        </div> <br> <br>
+
+
+        <div class="row content mb-4">
+            <div class="col-4">
+                <p class="subsectiontext text-center">Basic Information</p>
+
+            </div>
+            <div class="col-4">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt id, numquam necessitatibus a ex debitis eum autem facere harum aliquid vero quis nulla iste saepe error consequuntur odio, beatae iusto!</p>
+            </div>
+
+        </div>
+
+        <div class="row content mb-4">
+            <div class="col-4">
+                <p class="subsectiontext text-center">My Experience</p>
+
+            </div>
+            <div class="col-4">
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt id, numquam necessitatibus a ex debitis eum autem facere harum aliquid vero quis nulla iste saepe error consequuntur odio, beatae iusto!</p>
+            </div>
+
+        </div>
+
+
+        `
+
+    }
+</script>
+
+
+</html>

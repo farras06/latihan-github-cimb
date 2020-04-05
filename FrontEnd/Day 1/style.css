@@ -1,0 +1,43 @@
+
+
+table, tr, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+thead {
+    color: red          
+}
+
+.text-purple {
+    color: purple;
+}
+
+#corona {
+    color: blue
+}
+
+.container {
+    border: 5px solid red;
+    margin-top: 10px;
+    margin-left: 30%;
+    margin-right: 30%;
+    width: fit-content;
+    padding: 10px;
+    border-radius: 15px 0px;
+}
+
+.button {
+    color: black;
+    border-radius: 8px;
+    background-color:white;
+    padding: 10px 8px;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    
+}
+.button:hover {
+    cursor: pointer;
+    background-color: red;
+    color: white;
+}
